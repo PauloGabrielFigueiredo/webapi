@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace webapi.Data.Migrations
+namespace webapi.Migrations
 {
-    public partial class webapi : Migration
+    public partial class webapiv2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

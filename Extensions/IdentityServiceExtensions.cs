@@ -16,7 +16,6 @@ public static class IdentityServiceExtensions
     {
         services=AddInterfacesScopes(services);
         services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
-        services.AddSwagger();
         services.AddIdentityCore<AppUser>(opt =>
         {
                 opt.Password.RequireNonAlphanumeric = false;
@@ -42,8 +41,11 @@ public static class IdentityServiceExtensions
                       };
                   });
 
-        services.AddAuthorization();
-
+            services.AddAuthorization(opt =>
+            {
+                opt.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
+                opt.AddPolicy("Moderator", policy => policy.RequireRole("Admin","Moderator"));
+            });
         return services;
     }
     public static IServiceCollection AddInterfacesScopes(this IServiceCollection Services)
