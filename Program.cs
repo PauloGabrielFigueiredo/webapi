@@ -11,7 +11,7 @@ builder.Services.AddIdentityServices(builder.Configuration);
 
 // Add services to the container.
 builder.Services.AddDbContext<DataContext>(options => {
-    options.UseSqlServer("server=localhost;database=EFCoreMySQL;user=sa;password=<admin123>");
+    options.UseSqlServer("server=localhost;database=EFCore;user=sa;password=R.desktop123");
 });
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
