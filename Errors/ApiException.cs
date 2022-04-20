@@ -1,4 +1,4 @@
-namespace WebApi.Errors;
+namespace webapi.Errors;
 
 public class ApiException
 {

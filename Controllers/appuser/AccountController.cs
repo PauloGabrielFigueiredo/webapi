@@ -46,7 +46,7 @@ public class AccountController : BaseApiController
    [HttpPost("register")]
     public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
     {
-       AppUser user = await _userRepository.GetAppUserAsync(registerDto.Username);
+       var user = await _userRepository.GetAppUserAsync(registerDto.Username);
 
        if (user != null) return BadRequest("Invalid");
 
@@ -57,9 +57,9 @@ public class AccountController : BaseApiController
 
         if (!result.Succeeded) return BadRequest();
 
-        var roleResult = await _userManager.AddToRoleAsync(userregister, "Member");
+       // var roleResult = await _userManager.AddToRoleAsync(userregister, "Member");
 
-        if (!roleResult.Succeeded) return BadRequest();
+     //   if (!roleResult.Succeeded) return BadRequest();
 
         return Ok();
         
@@ -68,7 +68,7 @@ public class AccountController : BaseApiController
     [HttpPost("login")]
     public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
     {
-        AppUser user = await _userRepository.GetAppUserAsync(loginDto.Username);
+        var user = await _userRepository.GetAppUserAsync(loginDto.Username);
 
         if (user == null) return Unauthorized("Invalid username");
 

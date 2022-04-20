@@ -21,20 +21,20 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<AppUser> GetAppUserAsync(string username)
+    public async Task<AppUser?> GetAppUserAsync(string username)
     {
         return await _userManager.Users
             .Where(x=>x.NormalizedUserName == username.ToUpper())
-            .SingleAsync();
+            .SingleOrDefaultAsync();
     }
 
 
-    public async Task<MemberDto> GetMemberAsync(string username)
+    public async Task<MemberDto?> GetMemberAsync(string username)
     {
         return await _userManager.Users
             .Where(x=>x.NormalizedUserName == username.ToUpper())
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
-            .SingleAsync();
+            .SingleOrDefaultAsync();
     }
 
     public async Task<AppUser> GetAppUserByEmailAsync(string email)

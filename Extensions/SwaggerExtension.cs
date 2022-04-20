@@ -8,7 +8,7 @@ namespace webapi.Extensions
 {
     public static class SwaggerExtension
     {
-        public static void AddSwagger(this IServiceCollection services)
+        public static void AddSwagger(this IServiceCollection services, IConfiguration config)
         {
             services.AddSwaggerGen(c =>
             {

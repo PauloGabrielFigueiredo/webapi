@@ -8,8 +8,8 @@ namespace webapi.Interfaces
 {
     public interface IUserRepository
     {
-        Task<AppUser> GetAppUserAsync(string username);
-        Task<MemberDto> GetMemberAsync(string username);
+        Task<AppUser?> GetAppUserAsync(string username);
+        Task<MemberDto?> GetMemberAsync(string username);
 
         Task<AppUser> GetAppUserByEmailAsync(string email);
         Task<MemberDto> GetMemberByEmailAsync(string email);
