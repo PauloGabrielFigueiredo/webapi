@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace webapi.Controllers;
@@ -7,11 +8,4 @@ namespace webapi.Controllers;
 public class BaseApiController : ControllerBase
 {        
     
-    [HttpGet,Route("Version")]
-    public ActionResult<string> Version(string username)
-    {
-        return Ok("Version 1.0");
-
-        
-    }
 }
