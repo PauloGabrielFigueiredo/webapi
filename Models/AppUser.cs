@@ -17,6 +17,7 @@ public class AppUser : IdentityUser<int>
         public string Alergies { get; set; }
 
         public bool? MobilityDifficulties { get; set; }
+        
         public string Profession { get; set; }
  
        // public ICollection<Photo> Photos { get; set; }
