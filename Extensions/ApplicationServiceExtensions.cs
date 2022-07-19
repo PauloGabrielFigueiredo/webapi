@@ -24,8 +24,10 @@ public static class ApplicationServiceExtensions
         });
 
         Services.AddLogging();
-        Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(config.GetConnectionString("SqlServer")));
-
+        //Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(config.GetConnectionString("SqlServer")));
+        Services.AddDbContext<DataContext>(opt => opt.UseNpgsql(config.GetConnectionString("Heroku")));
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         return Services;
     }
 
