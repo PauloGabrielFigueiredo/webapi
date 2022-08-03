@@ -1,8 +1,8 @@
 using System.Security.Claims;
 
-namespace webapi.Extensions
+namespace webapi.Helpers
 {
-    public static class ClaimsPrincipleExtensions
+    public static class ClaimsPrincipleHelpers
     {
         public static string GetUsername(this ClaimsPrincipal user)
         {

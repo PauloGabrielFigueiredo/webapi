@@ -77,9 +77,11 @@ public class AccountController : BaseApiController
         if (!result.Succeeded) return Unauthorized();
         
         UserDto response = new UserDto();
+        
         _mapper.Map(user, response);
 
         response.Token = _tokenService.CreateToken(user);
+        response.HasPrivacyPolicyAccepted=user.HasPrivacyPolicyAccepted;
 
         return Ok(response);
     }

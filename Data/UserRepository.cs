@@ -77,6 +77,13 @@ public class UserRepository : IUserRepository
 
     public void Update(AppUser user)
     {
-        throw new NotImplementedException();
+        _context.Entry(user).State= EntityState.Modified;
+    
     }
+
+    public async Task<bool> Save ()  
+ {
+    var changes= await _context.SaveChangesAsync();
+    return changes > 0;
+   } 
 }
