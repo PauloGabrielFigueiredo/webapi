@@ -26,7 +26,8 @@ public static class IdentityServiceExtensions
                 opt.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
         })
             .AddSignInManager<SignInManager<AppUser>>()
-            .AddEntityFrameworkStores<DataContext>();
+            .AddEntityFrameworkStores<DataContext>()
+            .AddDefaultTokenProviders();
 
 
         services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

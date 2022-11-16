@@ -1,6 +1,6 @@
 namespace webapi.Helpers
 {
-    public class UserParams : PaginationParams
+    public class UserParams 
     {
         public string CurrentUsername { get; set; }
         public string Gender { get; set; }

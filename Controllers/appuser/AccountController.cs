@@ -85,21 +85,21 @@ public class AccountController : BaseApiController
 
         return Ok(response);
     }
-   
+   ///
     [HttpPost("TokenGenPassword")]
-    public async Task<ActionResult> TokenGenPassword(MemberDto memberDto) 
+    public async Task<ActionResult> TokenGenPassword(String Username) 
     {
-        AppUser user = await _userRepository.GetAppUserAsync(memberDto.Username);
+        AppUser user = await _userRepository.GetAppUserAsync(Username);
         string resettoken = await _userManager.GeneratePasswordResetTokenAsync(user);
         if(resettoken == null) return BadRequest();
         //TODO: SEND EMAIL -- WIP
-        return Ok();
+        return Ok(resettoken);
 
 
         //htttp://localhost.com/api/resetPassword2?token=sjghqkrgujhbeikugruhjbeurg&password=sdg&email=sdjg
     }
     
-    [HttpPost("ResetPassword")]
+    [HttpPost("ResetPassword/{token}")]
     public async Task<ActionResult> ResetPassword(string token, string password, string email)
     {
         
@@ -107,7 +107,7 @@ public class AccountController : BaseApiController
         if (user == null) return Unauthorized("Invalid email");
 
         IdentityResult result = await _userManager.ResetPasswordAsync(user, token, password);
-        if (result.Succeeded) Ok();
+        if (result.Succeeded) return Ok();
         return BadRequest();
     
                 

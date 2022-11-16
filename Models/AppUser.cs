@@ -27,7 +27,7 @@ public class AppUser : IdentityUser<int>
        public AppUserConfig config { get; set; }
 
 
-        public ICollection<AppUserRole> UserRoles { get; set; }
+        public  ICollection<AppUserRole> UserRoles { get; set; }
 
 
 }

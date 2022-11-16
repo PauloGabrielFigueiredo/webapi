@@ -27,34 +27,50 @@ namespace webapi.Controllers
             _userrepository =userrepository;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
-        {
-            var gender = await _userrepository.GetUserGender(User.GetUsername());
-            userParams.CurrentUsername = User.GetUsername();
+        // [HttpGet]
+        // public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
+        // {
+        //     var gender = await _userrepository.GetUserGender(User.GetUsername());
+        //     userParams.CurrentUsername = User.GetUsername();
 
-            if (string.IsNullOrEmpty(userParams.Gender))
-                userParams.Gender = gender == "male" ? "female" : "male";
+        //     if (string.IsNullOrEmpty(userParams.Gender))
+        //         userParams.Gender = gender == "male" ? "female" : "male";
 
-            var users = await _userrepository.GetMembersAsync(userParams);
+        //     var users = await _userrepository.GetMembersAsync(userParams);
 
-            Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
-                users.TotalCount, users.TotalPages);
+        //     Response.AddPaginationHeader(users.CurrentPage, users.PageSize,
+        //         users.TotalCount, users.TotalPages);
 
-            return Ok(users);
-        }
+        //     return Ok(users);
+        // }
 
         [HttpGet("{username}", Name = "GetUser")]
         public async Task<ActionResult<MemberDto>> GetUser(string username)
         {
             return await _userrepository.GetMemberAsync(username);
         }
-
-        [HttpPut]
-        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        
+      
+        [HttpDelete]
+        public async Task<ActionResult> DeleteUser(string username)
         {
 
-            var user = await _userrepository.GetUserByUsernameAsync(User.GetUsername());
+            AppUser user= await  _userrepository.GetAppUserAsync(username);
+
+
+            _userrepository.Delete(user);
+
+            if (await _userrepository.Save()) return Ok();
+
+            return BadRequest("Failed to delete user");
+        }
+
+        [HttpPut, Route("UpdateUser")]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username= User.Claims.ToList().First();
+
+            AppUser user= await  _userrepository.GetAppUserAsync(username.Value);
 
             _mapper.Map(memberUpdateDto, user);
 
@@ -64,6 +80,8 @@ namespace webapi.Controllers
 
             return BadRequest("Failed to update user");
         }
+        
+        
         [Authorize]
         [HttpPut, Route("AcceptPolicy")]
         public async Task<ActionResult> AcceptPolicy()
@@ -83,6 +101,7 @@ namespace webapi.Controllers
 
 
         } 
+        
 
 
         // [HttpPost("add-photo")]

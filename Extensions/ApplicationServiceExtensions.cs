@@ -22,10 +22,14 @@ public static class ApplicationServiceExtensions
             o.SerializerSettings.MissingMemberHandling  = MissingMemberHandling.Ignore;
             //o.SerializerSettings.DefaultValueHandling    = DefaultValueHandling.Ignore;
         });
+        var serverVersion = new MySqlServerVersion(new Version(8, 0, 29));
 
         Services.AddLogging();
-       // Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(config.GetConnectionString("SqlServer")));
-        Services.AddDbContext<DataContext>(opt => opt.UseNpgsql(config.GetConnectionString("Heroku")));
+        //Services.AddDbContext<DataContext>(opt => opt.UseSqlServer(config.GetConnectionString("SqlServer")));
+        //Services.AddDbContext<DataContext>(opt => opt.UseMySql(config.GetConnectionString("MySql"),Microsoft.EntityFrameworkCore.ServerVersion));
+        Services.AddDbContext<DataContext>(opt => opt.UseMySql(config.GetConnectionString("MySql"),serverVersion));
+
+        //Services.AddDbContext<DataContext>(opt => opt.UseNpgsql(config.GetConnectionString("Heroku")));
         AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
         AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
         return Services;
