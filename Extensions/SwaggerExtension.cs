@@ -15,10 +15,10 @@ namespace webapi.Extensions
                 c.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "WebsiteNameApi",
-                    Description = "WebsiteName Application WebApi",
-                    TermsOfService = new System.Uri("https://www.EmpresaTM.com/"),
-                    Contact = new OpenApiContact() { Name = "EmpresaTM", Email = "EmpresaTM@EmpresaTM.pt" }
+                    Title = "VisitPlannAPI",
+                    Description = "VisitPlann Application WebApi",
+                    TermsOfService = new System.Uri("https://www.visitplann.com/"),
+                    Contact = new OpenApiContact() { Name = "VisitPlann", Email = "info@visitplann.com" }
                 });
                  c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {

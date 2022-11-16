@@ -15,10 +15,14 @@ namespace webapi.Interfaces
         Task<MemberDto> GetMemberByEmailAsync(string email);
 
         void Update(AppUser user);
+
+        void Delete(AppUser user);
+
+        Task<bool> Save();
+
         Task<IEnumerable<AppUser>> GetUsersAsync();
         Task<AppUser> GetUserByIdAsync(int id);
         Task<AppUser> GetUserByUsernameAsync(string username);
-        Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams);
         Task<string> GetUserGender(string username);
     }
 }

@@ -19,12 +19,15 @@ public class AppUser : IdentityUser<int>
         public bool? MobilityDifficulties { get; set; }
         
         public string Profession { get; set; }
+
+        public bool HasPrivacyPolicyAccepted { get; set; }
+
  
        // public ICollection<Photo> Photos { get; set; }
        public AppUserConfig config { get; set; }
 
 
-        public ICollection<AppUserRole> UserRoles { get; set; }
+        public  ICollection<AppUserRole> UserRoles { get; set; }
 
 
 }

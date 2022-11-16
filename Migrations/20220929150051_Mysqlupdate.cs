@@ -2,9 +2,9 @@
 
 #nullable disable
 
-namespace webapi.Data.Migrations
+namespace webapi.Migrations
 {
-    public partial class webapi12 : Migration
+    public partial class Mysqlupdate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -50,10 +50,7 @@ public class UserRepository : IUserRepository
             .ProjectTo<MemberDto>(_mapper.ConfigurationProvider)
             .SingleAsync();
     }
-    public Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
-    {
-        throw new NotImplementedException();
-    }
+   
 
     public Task<AppUser> GetUserByIdAsync(int id)
     {
@@ -77,6 +74,20 @@ public class UserRepository : IUserRepository
 
     public void Update(AppUser user)
     {
-        throw new NotImplementedException();
+        _context.Entry(user).State= EntityState.Modified;
+    
     }
+
+public void Delete(AppUser user)
+    {
+        _context.Entry(user).State= EntityState.Deleted;
+    
+    }
+    public async Task<bool> Save ()  
+ {
+    var changes= await _context.SaveChangesAsync();
+    return changes > 0;
+   } 
+
+    
 }
